@@ -134,3 +134,26 @@ nazevFilmu.innerHTML = `${vybranyFilm.nazev}`
 popisFilmu.innerHTML = `${vybranyFilm.popis}`
 premiera.innerHTML = `${vybranyFilm.premiera}`
 plakat.src = `${vybranyFilm.plakat.url}`
+
+//Možnost vyplnění formuláře Poznámka
+const formular = document.querySelector("#note-form");
+
+formular.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+const textovePole = document.querySelector("#message-input")
+const policko = document.querySelector("#terms-checkbox")
+const textPoznamky = document.querySelector(".card-text")
+
+if (textovePole.value.trim() === "") {
+	textovePole.classList.add("is-invalid");
+} else {
+	textovePole.classList.remove("is-invalid");
+		if (!policko.checked) {
+		policko.classList.add("is-invalid");
+	} else {
+		textPoznamky.innerHTML = textovePole.value.trim()
+		policko.classList.remove("is-invalid");
+	}
+}
+})
