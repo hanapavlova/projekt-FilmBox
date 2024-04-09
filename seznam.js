@@ -103,4 +103,41 @@ const filmy = [
 			'Na zámek v podhůří Krkonoš přijíždí jeho nový majitel Štěpán se svojí snoubenkou, krásnou komtesou Blankou, a mladším bratrem Adamem. Cestou kočár nešťastně srazí kolemjdoucí dívku, Adam jí pomůže a ona se do něj zamiluje. Na zámku Adam objeví starou vlašskou knihu, která by měla obsahovat cestu k pokladům. Tajemné značky vlašské knihy však nedokáže vyluštit ani národopisec Jiráček, který v kraji sbírá pověsti a nevychází z údivu nad tím, že zdejší lidé stále věří v Krakonoše. Na zámku se objeví záhadný cizinec a nabídne Štěpánovi, že jej k pokladu za určitých podmínek dovede. Výprava do hor může začít. Naplní se Liduščina láska k Adamovi? Jakou záhadu skrývá starý obraz na zámku Hůrka a co strašlivého se v horách kdysi odehrálo? A kdo je vlastně Krakonoš a jaké je jeho největší tajemství? (csfd.cz, Česká televize)',
 		premiera: '2022-12-24',
 	},
+	{
+		id: 'blbec-k-veceri',
+		nazev: 'Blbec k večeři',
+		plakat: {
+			url: 'https://image.pmgstatic.com/cache/resized/w420/files/images/film/posters/164/521/164521971_a71516.jpg',
+			sirka: 420,
+			vyska: 592,
+		},
+		ochutnavka: 'Francouzská komedie o tom, kdo je vlastně blbec.',
+		popis:
+			"Nikdy se neptej, kdo je tu větší blb! Nakladatel Pierre Brochant má zvláštní druh zábavy. Jednou týdně se schází se svými přáteli na tzv. „Večeři blbců“. Každý má za úkol sehnat na večeři jednoho blbce. Čím větší blb, tím líp – o to větší bude zábava. Tentokrát se Pierrovi podařilo získat jakéhosi Francoise Pignona, který pracuje na berním úřadě. Jeho životní vášní je stavění různých objektů ze sirek. Má dokonce svůj katalog. Je nesnesitelně otravný a nekonečně přihlouplý. Jenže tentokrát to Pierrovi tak snadno neprojde. Při golfu mu vypoví záda, nemůže se ani hýbat a v tom přichází Pignon na večeři. Pierre si jen potřebuje pustit záznamník…, aby si společně s Pignonem vyslechl vzkaz o tom, že ho opouští žena. A tím začínají Pignonovy eskapády, které Pierra psychicky i fyzicky téměř zruinují... Vynikající situační komedii, jejíž divadelní verze byla uvedena i na našich jevištích, natočil „odborník na komedie“ režisér Francis Veber (Hračka, Kopyto, Otec a otec, Uprchlíci), který do hlavních rolí obsadil Jacquese Villereta, Thierryho Lhermitta a Daniela Prévosta. (Česká televize)",
+		premiera: '2008-04-15',
+	}
 ]
+
+
+//vypsání karet filmů do stránky Seznam filmů
+const seznamFilmu = document.querySelector("#seznam-filmu");
+seznamFilmu.innerHTML = "";
+
+filmy.forEach((film) => {
+	seznamFilmu.innerHTML += `<div class="col">
+	<div class="card">
+	   <img
+		  src="${film.plakat.url}"
+		  width="780"
+		  height="520"
+		  class="card-img-top"
+		  alt="${film.nazev}"
+	   />
+	   <div class="card-body">
+		  <h5 class="card-title">${film.nazev}</h5>
+		  <p class="card-text">${film.ochutnavka}</p>
+		  <a href="film.html#${film.id}" class="btn btn-primary">Přehrát</a>
+	   </div>
+	</div>
+ </div>`
+  });
