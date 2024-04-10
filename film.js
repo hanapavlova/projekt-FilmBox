@@ -135,24 +135,55 @@ popisFilmu.innerHTML = `${vybranyFilm.popis}`
 premiera.innerHTML = `${vybranyFilm.premiera}`
 plakat.src = `${vybranyFilm.plakat.url}`
 
-//Možnost vyplnění formuláře Poznámka
+//Zobrazení data premiéry
+const datumPremiery = dayjs(premiera.textContent).valueOf()
+const datumPremieryFormat = dayjs(premiera.textContent).format('D. M. YYYY')
+premiera.innerHTML = `Premiéra <strong>${datumPremieryFormat}</strong>`
+
+//Výpočet, kolik dní uplynulo od premiéry
+const dnes = dayjs();
+const pocetDni = Math.abs(dayjs(datumPremiery).diff(dayjs(), 'days'));
+premiera.innerHTML += `, což bylo před ${pocetDni} dny.`
+
+//Klikání na hvězdičky - NEFUNGUJE
+const oznacit = (cislo) => {
+	const stars = document.querySelectorAll(".fa-star");
+
+	stars.forEach((star, index) => {
+		if (index <= cislo) {
+			stars.classList.remove ("far");	
+			stars.classList.add ("fas");
+		} else {
+			stars.classList.add ("far");	
+			stars.classList.remove ("fas")
+		}
+	star.addEventListener('click', () => {
+		const poradiHvezdicky = index + 1;
+		oznacit(poradiHvezdicky)
+	})
+})
+}
+
+//Vyplnění formuláře Poznámka
 const formular = document.querySelector("#note-form");
 
-formular.addEventListener("submit", function(event) {
+formular.addEventListener("submit", (event) => {
     event.preventDefault();
 
 const textovePole = document.querySelector("#message-input")
 const policko = document.querySelector("#terms-checkbox")
-const textPoznamky = document.querySelector(".card-text")
+const obsahFormulare = document.querySelector("#note-form")
 
 if (textovePole.value.trim() === "") {
 	textovePole.classList.add("is-invalid");
+	textovePole.focus();
 } else {
 	textovePole.classList.remove("is-invalid");
 		if (!policko.checked) {
 		policko.classList.add("is-invalid");
+		policko.focus();
 	} else {
-		textPoznamky.innerHTML = textovePole.value.trim()
+		obsahFormulare.innerHTML =`<p class="card-text">${textovePole.value.trim()}</p>`
 		policko.classList.remove("is-invalid");
 	}
 }
