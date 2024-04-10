@@ -145,24 +145,28 @@ const dnes = dayjs();
 const pocetDni = Math.abs(dayjs(datumPremiery).diff(dayjs(), 'days'));
 premiera.innerHTML += `, což bylo před ${pocetDni} dny.`
 
-//Klikání na hvězdičky - NEFUNGUJE
-const oznacit = (cislo) => {
-	const stars = document.querySelectorAll(".fa-star");
+//Klikání na hvězdičky
+let poradiHvezdicky = 0
+const stars = document.querySelectorAll(".fa-star");
 
-	stars.forEach((star, index) => {
-		if (index <= cislo) {
-			stars.classList.remove ("far");	
-			stars.classList.add ("fas");
+const oznacit = (cislo) => {
+		stars.forEach((star, index) => {
+		if (index < cislo) {
+			star.classList.remove("far");	
+			star.classList.add("fas");
 		} else {
-			stars.classList.add ("far");	
-			stars.classList.remove ("fas")
+			star.classList.add("far");	
+			star.classList.remove("fas");
 		}
-	star.addEventListener('click', () => {
-		const poradiHvezdicky = index + 1;
-		oznacit(poradiHvezdicky)
-	})
 })
 }
+
+const handleClick = (event) => {
+	poradiHvezdicky = Number(event.target.textContent);
+	oznacit(poradiHvezdicky)
+}	
+
+stars.forEach((star) => {star.addEventListener('click', handleClick)})
 
 //Vyplnění formuláře Poznámka
 const formular = document.querySelector("#note-form");
